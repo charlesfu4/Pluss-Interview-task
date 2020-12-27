@@ -1,14 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import UrlForm from './components/UrlForm'
-import UrlTable from './components/UrlTable'
+import UrlOp from './components/UrlOp'
 import urlservice from './services/urls'
 
 const App = () => {
   const [urls, setUrls] = useState([])
   const [newUrl, setNewUrl] = useState('')
   const [refreshClick, setRefreshClick] = useState(0)
- 
- 
   
   /** retrieve data from server wheneve
     the refreshClick is updated */ 
@@ -28,7 +26,6 @@ const App = () => {
     const repeatedUrl = urls.find(url => url.longurl === newUrl)
     if(repeatedUrl !== undefined){
       console.log(`id ${repeatedUrl.id}`)
-
     }
     // Long url not yet exists
     else{
@@ -39,8 +36,9 @@ const App = () => {
       urlservice
       .create(urlObject)
       .then(returnedUrl => {
-        setUrls(urls.concat(returnedUrl))
+        setUrls(returnedUrl)
         console.log(returnedUrl)
+        setNewUrl('')
       })
     }
   }
@@ -64,7 +62,7 @@ const App = () => {
     setNewUrl(event.target.value)
 
   // handle refresh button clicked
-  const handleRefreshClick = (event) =>
+  const handleRefreshClick = () =>
     setRefreshClick(refreshClick+1)
 
   return(
@@ -81,7 +79,7 @@ const App = () => {
         </div>
         <div className="column">
           <center>
-            <UrlTable refresh={handleRefreshClick} 
+            <UrlOp refresh={handleRefreshClick} 
             urls={urls} del={deleteUrl} />
           </center>
         </div>

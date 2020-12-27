@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UrlTable = ({refresh, urls, del}) =>{
+const UrlOp = ({refresh, urls, del}) =>{
   return (
       <div>
           <button onClick={refresh}>Refresh</button>
@@ -12,18 +12,18 @@ const UrlTable = ({refresh, urls, del}) =>{
                       <th>Actions</th>
                   </tr>
               </thead>
-              <tbody>
-                  {urls.map((url, i) => 
-                    <tr key={i}>
+              {urls.map((url, i) => 
+              <tbody key={i}>
+                    <tr>
                         <td>{url.longurl}</td>
-                        <td>{url.shorturl}</td>
+                        <td>{`http://localhost:3001/pluss.app/${url.shorturl}`}</td>
                         <td><button onClick={() => del(url.id)}>Delete</button></td>
                     </tr>
-                  )}
               </tbody>
+              )}
           </table>
       </div>
   )
 }
 
-export default UrlTable
+export default UrlOp
