@@ -8,7 +8,7 @@ const App = () => {
   const [newUrl, setNewUrl] = useState('')
   const [refreshClick, setRefreshClick] = useState(0)
   
-  /** retrieve data from server wheneve
+  /** retrieve data from server whenever
     the refreshClick is updated */ 
   useEffect(() => {
     console.log('refresh')
@@ -19,9 +19,27 @@ const App = () => {
     })
   },[refreshClick]) 
 
+  // validURL checker
+  const validURL = (str) => {
+    let pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+      '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return !!pattern.test(str);
+  }
+
   // Add new long url and create shorten version
   const addUrl = (event) =>{
     event.preventDefault()
+
+    // Not a legal url
+    if(!validURL(newUrl)){
+      console.log('Input url is illegal.')
+      return
+    }
+    
     // Long url already existed
     const repeatedUrl = urls.find(url => url.longurl === newUrl)
     if(repeatedUrl !== undefined){
@@ -70,20 +88,14 @@ const App = () => {
       <h1>
         <center>Tiny Url Creator</center>
       </h1>
-      <div className="row">
-        <div className="column">
-          <center>
-            <UrlForm addUrl={addUrl} handleUrlChange={handleUrlChange}
-            newUrl={newUrl} />
-          </center>
-        </div>
-        <div className="column">
-          <center>
-            <UrlOp refresh={handleRefreshClick} 
-            urls={urls} del={deleteUrl} />
-          </center>
-        </div>
-      </div>
+        <center>
+          <UrlForm addUrl={addUrl} handleUrlChange={handleUrlChange}
+          newUrl={newUrl} />
+        </center>
+        <center>
+          <UrlOp refresh={handleRefreshClick} 
+          urls={urls} del={deleteUrl} />
+        </center>
     </div>
   )
 }

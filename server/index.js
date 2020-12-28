@@ -22,7 +22,7 @@ app.get('/api/urls/:id', (request, response) =>{
 })
 
 // redirect to longurl with specific shorturl 
-app.get('/pluss.app/:shorturl', (request, response) =>{
+app.get('/s/:shorturl', (request, response) =>{
   const shorturl = request.params.shorturl
   const url = urls.find(url => url.shorturl === shorturl)
   console.log('redirect',url)
@@ -56,7 +56,7 @@ app.post('/api/urls', (request, response) => {
   }
   const url = {
     longurl: body.longurl,
-    shorturl: nanoid(10),
+    shorturl: nanoid(8),
     id: generateId(),
   }
 
