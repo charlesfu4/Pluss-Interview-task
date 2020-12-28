@@ -13,3 +13,14 @@ If the user decides to "Delete" an URL the page will talk to the API to delete t
 - Do not spend too much time making the page look "nice". Use opensource libraries such as https://material-ui.com/ to help you.
 - With regards to storing the full and short URL you can just use the memory of the server if it helps, if you want to make it permanent you can use mongodb, postgresql, whatever you decide and helps you
 
+## Make sure the nodejs and react version is the latest before testing it
+
+### Run the server:
+
+- Toggle to /server, run `npm install`
+- Then run `npm start`, the server will be at localhost:3001
+
+### Run the client:
+
+- Toggle to /client, run `npm install`
+- Then run `npm start`, the client will be at localhost:3000
