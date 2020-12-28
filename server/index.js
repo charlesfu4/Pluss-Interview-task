@@ -1,10 +1,9 @@
 const express = require('express')
-const cors = require('cors')
 const {nanoid} = require('nanoid')
 const app = express()
 
 app.use(express.json())
-app.use(cors())
+app.use(express.static('build'))
 
 let urls = []
 
@@ -72,7 +71,7 @@ app.post('/api/urls', (request, response) => {
   response.json(urls)
 })
 
-const PORT = 3001 
+const PORT = process.env.PORT || 3001 
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`)
 })
