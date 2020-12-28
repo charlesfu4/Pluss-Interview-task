@@ -15,7 +15,7 @@ app.get('/api/urls', (request, response) =>{
 
 // get specfic url with id
 app.get('/api/urls/:id', (request, response) =>{
-  const id = number(request.params.id)
+  const id = Number(request.params.id)
   const url = urls.find(url => url.id === id)
   if(url) return response.json(url)
   else return response.status(404).end()
@@ -33,12 +33,14 @@ app.get('/s/:shorturl', (request, response) =>{
 // delete specific url with id
 app.delete('/api/urls/:id', (request, response) => {
   const id = Number(request.params.id)
-  urls = urls.filter(url => url.id !== id)
-  
-  response.status(204).end()
+  if(urls.find(url => url.id === id) == undefined)
+    return response.status(404).end()
+  else(urls = urls.filter(url => url.id !== id))
+    response.status(204).end()
 })
 
 // create new url
+// incremental id
 const generateId = () => {
   const maxId = urls.length > 0
     ? Math.max(...urls.map(url => url.id))
@@ -54,6 +56,10 @@ app.post('/api/urls', (request, response) => {
     error: 'longurl missing' 
     })
   }
+
+  if(urls.find(url => url.longurl === body.longurl) !== undefined)
+    return response.status(409).end()
+
   const url = {
     longurl: body.longurl,
     shorturl: nanoid(8),
