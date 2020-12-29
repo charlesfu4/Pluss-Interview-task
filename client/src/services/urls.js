@@ -1,5 +1,7 @@
+import { ContactMailSharp } from '@material-ui/icons'
 import axios from 'axios'
 const baseUrl = '/api/urls'
+const shortDir = '/s'
 
 const getAll = () => {
   const request = axios.get(baseUrl)
@@ -18,7 +20,6 @@ const update = (id, newObject) => {
   
 const del = (id) => {
   const request = axios.delete(`${baseUrl}/${id}`)
-  console.log(request)
   return request.then(response => response.data)
 }
   

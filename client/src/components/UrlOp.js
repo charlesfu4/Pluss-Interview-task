@@ -60,7 +60,7 @@ const UrlOp = ({refresh, urls, del}) =>{
                   <a href={url.longurl}>{url.longurl}</a>
                 </StyledTableCell>
                 <StyledTableCell>
-                  <a href={`http://localhost:3001/s/${url.shorturl}`}>
+                  <a href={`/s/${url.shorturl}`}>
                       {url.shorturl}</a>
                 </StyledTableCell>
                 <StyledTableCell>
