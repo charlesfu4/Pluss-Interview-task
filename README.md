@@ -19,3 +19,4 @@ If the user decides to "Delete" an URL the page will talk to the API to delete t
 
 - Toggle to /server, run `npm run build:ui`
 - Then run `npm start`, the application will be run at localhost:3001
+- A deployment to Heroku can be accessed here https://pacific-headland-52179.herokuapp.com/
